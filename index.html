@@ -51,6 +51,7 @@
  			clear: left;
  		}
  		#yourChosenCharDisplay {
+ 			box-sizing: border-box;
  			height: 200px;
  			float: left;
  		}
@@ -162,19 +163,37 @@ var chars = {
 	};*/
 
 	$('.char').on('click', function(){
+		if(!isCharChosen){
 		chosenChar=$(this).attr('value');
 		console.log(chosenChar);
 		console.log(this);
+		var imageSource = (chars.luke.image);
 		$('#yourCharChoiceDisplay').hide();
 		$('#yourChosenCharDisplay').append(chosenChar);
 
 		$('#name').html(chars.luke.name);
-		$('#imgSrc').html(chars.luke.image);
+		$('#imgSrc').attr(chars.luke, imageSource);
+		console.log(imageSource);
 		$('#chosenhp').html(chars.luke.hp);
 
 		console.log(chars.luke.image);
 		console.log(chars.luke.name);
 		console.log(chosenChar.name);
+		}
+		else{
+			/*check to see ifEnemyChosen  
+			if not set enemy and set all other characters to enemies to choose from*/
+		}
+
+		/* move on to attack buttons
+		check health.
+		deduct damage from health
+		add strength to attack power and keep track
+		check to see if either health has gone to <= 0
+		if charChosen hp <=0 then game over
+		if enemyChosen hp<=0 then move to choose another enemy
+		set enemy chosen to false;*/
+
 	})
 	
 
