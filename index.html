@@ -69,12 +69,17 @@
 	 		<div id="yourCharChoiceDisplay">
 	 			<div id="luke" class="char" value='luke'><div>Luke</div><img src=assets/images/luke.png alt="Luke Skywalker"><div>100</div></div>
 	 			<div id="obi-wan" class="char" value='obi_wan'><div>Obi-Wan</div><img src=assets/images/obi_wan.png alt="Obi-Wan"><div>120</div></div>
-	 			<div id="count_dooku" class="char" value='count-dooku'><div>Count Dooku</div><img src=assets/images/count_dooku.png alt="Count Dooku"><div>150</div></div>
+	 			<div id="count_dooku" class="char" value='count_dooku'><div>Count Dooku</div><img src=assets/images/count_dooku.png alt="Count Dooku"><div>150</div></div>
 	 			<div id="yoda" class="char" value='yoda'><div>Yoda</div><img src=assets/images/yoda.png alt="Yoda"><div>180</div></div>
 	 			</div>
 	 		<div><h3>Your Character</h3></div>
 	 		<div id="yourChosenCharDisplay">
-	 			<div id="chosenChar" class="char" value='chosenChar'><div id="name">Vader</div><img id=imgSrc src="assets/images/vader.png" alt=""><div id="chosenhp">000</div></div>
+	 			<div id="myluke" class="char" value='luke'><div>Luke</div><img src=assets/images/luke.png alt="Luke Skywalker"><div>100</div></div>
+	 			<div id="myobi-wan" class="char" value='obi_wan'><div>Obi-Wan</div><img src=assets/images/obi_wan.png alt="Obi-Wan"><div>120</div></div>
+	 			<div id="mycount_dooku" class="char" value='count_dooku'><div>Count Dooku</div><img src=assets/images/count_dooku.png alt="Count Dooku"><div>150</div></div>
+	 			<div id="myyoda" class="char" value='yoda'><div>Yoda</div><img src=assets/images/yoda.png alt="Yoda"><div>180</div></div>
+	 			</div>
+	 			<!--<div id="chosenChar" class="char" value='chosenChar'><div id="name">Vader</div><img id=imgSrc src="assets/images/vader.png" alt=""><div id="chosenhp">000</div></div>-->
 	 		</div>
 	 		<div><h3>Enemies Available to Attack</h3></div>
 	 		<div id="enemyChoiceDisplay">
@@ -161,6 +166,11 @@ var chars = {
 		image: 'img src=assets/images/vader.png'
 		}
 	};*/
+	$('#myluke').hide();
+	$('#myobi-wan').hide();
+	$('#mycount_dooku').hide();
+	$('#myyoda').hide();
+
 
 	$('.char').on('click', function(){
 		if(!isCharChosen){
@@ -170,6 +180,10 @@ var chars = {
 		var imageSource = (chars.luke.image);
 		$('#yourCharChoiceDisplay').hide();
 		$('#yourChosenCharDisplay').append(chosenChar);
+		if(chosenChar==='luke'){$('#myluke').show();}
+		else if(chosenChar==='obi_wan'){$('#myobi-wan').show();}
+		else if(chosenChar==='count_dooku'){$('#mycount_dooku').show();}
+		else if(chosenChar==='yoda'){$('#myyoda').show();}
 
 		$('#name').html(chars.luke.name);
 		$('#imgSrc').attr(chars.luke, imageSource);
