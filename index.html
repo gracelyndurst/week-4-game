@@ -43,9 +43,9 @@
  			padding: 0px 0px 0px 0px;
  			background-color: #ffffff;
  		}
- 		/*.btn {
+ 		.btn {
  			float: left;
- 		}*/
+ 		}
 
  		h3 {
  			clear: left;
@@ -60,6 +60,9 @@
  			height: 200px;
  			float: left;
  		}
+ 		#resultMessage {
+ 			color: white;
+ 		}
 
  	</style>
 
@@ -68,10 +71,10 @@
 	<div class="col-lg-4">
 		<div class="panel">
 	 		<div id="yourCharChoiceDisplay">
-	 			<div id="luke" class="char" value='luke'><div>Luke</div><img src=assets/images/luke.png alt="Luke Skywalker"><div>100</div></div>
-	 			<div id="obi_wan" class="char" value='obi_wan'><div>Obi-Wan</div><img src=assets/images/obi_wan.png alt="Obi-Wan"><div>120</div></div>
-	 			<div id="count_dooku" class="char" value='count_dooku'><div>Count Dooku</div><img src=assets/images/count_dooku.png alt="Count Dooku"><div>150</div></div>
-	 			<div id="yoda" class="char" value='yoda'><div>Yoda</div><img src=assets/images/yoda.png alt="Yoda"><div>180</div></div>
+	 			<div id="luke" class="char" value='luke'><div>Luke</div><img src=assets/images/luke.png alt="Luke Skywalker"><div class='hp'>100</div></div>
+	 			<div id="obi_wan" class="char" value='obi_wan'><div>Obi-Wan</div><img src=assets/images/obi_wan.png alt="Obi-Wan"><div class='hp'>120</div></div>
+	 			<div id="count_dooku" class="char" value='count_dooku'><div>Count Dooku</div><img src=assets/images/count_dooku.png alt="Count Dooku"><div class='hp'>150</div></div>
+	 			<div id="yoda" class="char" value='yoda'><div>Yoda</div><img src=assets/images/yoda.png alt="Yoda"><div class='hp'>180</div></div>
 	 			</div>
 	 		<div><h3>Your Character</h3></div>
 	 		<div id="yourChosenCharDisplay">
@@ -102,8 +105,8 @@
 	 		</div>
 
 	 		<div id="buttons"></div>
-	 		<button class=btn id="clear">clear</button>
-	 		<div id="resultMessage"></div>
+	 		<!--<button class=btn id="clear">clear</button>-->
+	 		<div id="resultMessage" color='white'><h3></h3></div>
 	 		<button class=btn id="restart">Restart</button>
  		</div>
 	</div>
@@ -118,6 +121,11 @@ $(document).ready(function(){
 	var isEnemyChosen=false;
 	var chosenobj;
 	var chosenEnemyobj;
+	var playerHp;
+	var playerAp;
+	var enemyHp;
+	var enemyAp;
+	var stillPlaying=true;
 
 var chars = {
 	luke: {
@@ -227,27 +235,55 @@ var chars = {
 
 
 //Area for Attack button function
+				playerHp=(chosenobj.hp);
+				playerAp=(chosenobj.attack);
+				enemyHp=(chosenEnemyobj.hp);
+				enemyAp=(chosenEnemyobj.attack);
+
+
 		$(function() {
-			$('#attack').on('click', function() {
-				console.log(chosenobj.hp);
-			})
+			if(enemyHp<=0){
+				$('#resultMessage').html('You beat him. Choose another enemy');
+			}
 
+			else if(playerHp<=0){
+				$('#resultMessage').html('Game Over');
+			}
+			else{
+				$('#attack').on('click', function() {
+					var tempPlayerHp=(playerHp-enemyAp);
+						playerHp=tempPlayerHp;
+					//console.log(tempPlayerHp);
+						$('#yourChosenCharDisplay .hp').html(tempPlayerHp);
+					var tempEnemyHp=(enemyHp-playerAp);
+						enemyHp=tempEnemyHp;
+						$('#fightSectionDisplay .hp').html(tempEnemyHp);
+						$('#resultMessage').html('You attacked ' + chosenEnemyobj.name + ' for ' + playerAp + ' damage. </n> And he attacked you for ' + enemyAp + ' damage.');
+						playerAp=(playerAp + enemyAp);
+						//alert(playerHp);
+						
+					//if(playerHp<0){
+					//		stillPlaying=false;
+					//		return false;
+					//}
+					return;
+				});
+			}
+			
+			
+			//else if(enemyHp <= 0){
+			//	$('#resultMessage').html('You beat him. Choose another enemy');
+			//}
+			//else if(playerHp <= 0){
+				//$('#resultMessage').html('Game Over');
+			//}
 
+			return;
 		})
 
 
 
-	})
-
-		
-	
-				
-
-
-
-
-			
-
+	});
 			
 			/*check to see ifEnemyChosen  
 			if not set enemy and set all other characters to enemies to choose from*/
@@ -263,20 +299,8 @@ var chars = {
 		set enemy chosen to false;*/
 
 		//})
-	
-
-
-
-
-
-
-
-
-
-
-
-
-})
+		$('#restart').on('click', function() {})
+});
 
 
 
