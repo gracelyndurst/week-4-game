@@ -40,7 +40,7 @@
 
  		.char img {
  			height: 110px;
- 			padding: 0px 0px 2px 0px;
+ 			padding: 0px 0px 0px 0px;
  			background-color: #ffffff;
  		}
  		/*.btn {
@@ -49,6 +49,7 @@
 
  		h3 {
  			clear: left;
+ 			color: white;
  		}
  		#yourChosenCharDisplay {
  			box-sizing: border-box;
@@ -68,7 +69,7 @@
 		<div class="panel">
 	 		<div id="yourCharChoiceDisplay">
 	 			<div id="luke" class="char" value='luke'><div>Luke</div><img src=assets/images/luke.png alt="Luke Skywalker"><div>100</div></div>
-	 			<div id="obi-wan" class="char" value='obi_wan'><div>Obi-Wan</div><img src=assets/images/obi_wan.png alt="Obi-Wan"><div>120</div></div>
+	 			<div id="obi_wan" class="char" value='obi_wan'><div>Obi-Wan</div><img src=assets/images/obi_wan.png alt="Obi-Wan"><div>120</div></div>
 	 			<div id="count_dooku" class="char" value='count_dooku'><div>Count Dooku</div><img src=assets/images/count_dooku.png alt="Count Dooku"><div>150</div></div>
 	 			<div id="yoda" class="char" value='yoda'><div>Yoda</div><img src=assets/images/yoda.png alt="Yoda"><div>180</div></div>
 	 			</div>
@@ -115,6 +116,8 @@ $(document).ready(function(){
 	var chosenEnemy="";
 	var isCharChosen=false;
 	var isEnemyChosen=false;
+	var chosenobj;
+	var chosenEnemyobj;
 
 var chars = {
 	luke: {
@@ -151,69 +154,93 @@ var chars = {
 		}
 	};
 
-/*var enemy = {
-	count_dooku: {
-		hp: 100,
-		attack: 6,
-		href: 'assets/images/count_dooku.png',
-		image: 'img src=assets/images/count_dooku.png'
-		},
-	darth_maul: {
-		hp: 100,
-		attack: 6,
-		href: 'assets/images/darth_maul.png',
-		image: 'img src=assets/images/darth_maul.png'
-		},
-	palpatine: {
-		hp: 100,
-		attack: 6,
-		href: 'assets/images/palpatine.png',
-		image: 'img src=assets/images/palpatine.png'
-		},
-	vader: {
-		hp: 100,
-		attack: 6,
-		href: 'assets/images/vader.png',
-		image: 'img src=assets/images/vader.png'
-		}
-	};*/
-	// $('#myluke').hide();
-	// $('#myobi-wan').hide();
-	// $('#mycount_dooku').hide();
-	// $('#myyoda').hide();
-	// $('#enemyluke').hide();
-	// $('#enemyobi-wan').hide();
-	// $('#enemycount_dooku').hide();
-	// $('#enemyyoda').hide();
+
 
 
 	$('.char').on('click', function(){
 		if(!isCharChosen){
 			chosenChar=$(this).attr('value');
-			var chosenobj=$(this).attr('value');
-			console.log(chars.chosenobj.hp);
-			console.log(chosenChar);
-			console.log(this);
-			//var imageSource = (chars.luke.image);
-			// $('#yourCharChoiceDisplay').hide();
-			$('#yourChosenCharDisplay').append(this);
+			if(chosenChar==='luke'){
+				chosenobj=(chars.luke);
+					$('#obi_wan').css('background-color', 'red');
+					$('#count_dooku').css('background-color', 'red');
+					$('#yoda').css('background-color', 'red');}
+			if(chosenChar==='obi_wan'){
+				chosenobj=(chars.obi_wan);
+					$('#luke').css('background-color', 'red');
+					$('#count_dooku').css('background-color', 'red');
+					$('#yoda').css('background-color', 'red');}
+			if(chosenChar==='count_dooku'){
+				chosenobj=(chars.count_dooku);
+					$('#luke').css('background-color', 'red');
+					$('#obi_wan').css('background-color', 'red');
+					$('#yoda').css('background-color', 'red');}
+			if(chosenChar==='yoda'){
+				chosenobj=(chars.yoda);
+					$('#luke').css('background-color', 'red');
+					$('#obi_wan').css('background-color', 'red');
+					$('#count_dooku').css('background-color', 'red');}
 
+					console.log(chosenobj);
+					console.log(chosenobj.name);
+					console.log(chosenChar);
+					console.log(this);
+					//var imageSource = (chars.luke.image);
+					// $('#yourCharChoiceDisplay').hide();
+					$('#yourChosenCharDisplay').append(this);
 
-			console.log(chars.luke.image);
-			console.log(chars.luke.name);
-			console.log(chosenChar.name);
-			isCharChosen=true;
+					//console.log(enemy);
+					console.log(chars.luke.image);
+					console.log(chars.luke.name);
+					console.log(chosenChar.name);
+					isCharChosen=true;
+					return $(this).attr('value');}
+		else{
+			if(!isEnemyChosen){
+				if($(this).attr('value')==chosenChar){
+					return false;
+				}
+				else{
+					chosenEnemy=$(this).attr('value');
+					$('#fightSectionDisplay').append(this);
+					console.log(this);
+						if(chosenEnemy==='luke'){
+							chosenEnemyobj=(chars.luke);
+						}
+						if(chosenEnemy==='obi_wan'){
+							chosenEnemyobj=(chars.obi_wan);
+						}
+						if(chosenEnemy==='count_dooku'){
+							chosenEnemyobj=(chars.count_dooku);
+						}
+						if(chosenEnemy==='yoda'){
+							chosenEnemyobj=(chars.yoda);
+						}
+					console.log(chosenobj.name);
+					console.log(chosenEnemyobj);
+					isEnemyChosen=true;
+					//return $(this).attr('value');
+				}
+			}
+
 		}
+
+
+//Area for Attack button function
+		$(function() {
+			$('#attack').on('click', function() {
+				console.log(chosenobj.hp);
+			})
+
+
+		})
+
+
+
 	})
 
 		
-	$('.char').on('click', function(){
-		if(!isEnemyChosen){
-			chosenEnemy=$(this).attr('value');
-			$('#fightSectionDisplay').append(this);
-			console.log(this);
-			}
-		})
+	
 				
 
 
