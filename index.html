@@ -112,7 +112,7 @@ $(document).ready(function(){
 	var playerAp;
 	var enemyHp;
 	var enemyAp;
-	var enimiesDefeted=0;
+	var enemiesDefeated=0;
 	var stillPlaying=true;
 		var chars = {
 			luke: {
@@ -125,24 +125,24 @@ $(document).ready(function(){
 				},
 			obi_wan: {
 				name: 'Obi-Wan',
-				hp: 150,
-				attack: 10,
+				hp: 120,
+				attack: 8,
 				href: 'assets/images/obi_wan.png',
 				image: 'img src=assets/images/obi_wan.png',
 				
 				},
 			count_dooku: {
 				name: 'Count Dooku',
-				hp: 100,
-				attack: 6,
+				hp: 150,
+				attack: 10,
 				href: 'assets/images/count_dooku.png',
 				image: 'img src=assets/images/count_dooku.png'
 				
 				},
 			yoda: {
 				name: 'Yoda',
-				hp: 250,
-				attack: 20,
+				hp: 180,
+				attack: 12,
 				href: 'assets/images/yoda.png',
 				image: 'img src=assets/images/yoda.png',
 				
@@ -156,7 +156,9 @@ $(document).ready(function(){
 				console.log(stillPlaying);
 
 					$('.char').on('click', function(){
+						console.log('im in choose player function');
 						if(!isCharChosen){
+							$('#restartbtn').empty();
 							chosenChar=$(this).attr('value');
 							if(chosenChar==='luke'){
 								chosenobj=(chars.luke);
@@ -236,6 +238,7 @@ $(document).ready(function(){
 
 				//Area for Attack button function
 		function attackfunction(){		
+						console.log('im in attack function');
 						$(function() {
 								$('#attack').on('click', function() {
 										var tempPlayerHp=(playerHp-enemyAp);
@@ -246,17 +249,23 @@ $(document).ready(function(){
 											enemyHp=tempEnemyHp;
 											$('#fightSectionDisplay .hp').html(tempEnemyHp);
 											$('#resultMessage').html('You attacked ' + chosenEnemyobj.name + ' for ' + playerAp + ' damage. </n> And he attacked you for ' + enemyAp + ' damage.');
-											playerAp=(playerAp + enemyAp);
+											playerAp=(playerAp + (2 * enemyAp));
 
 									if(playerHp<=0){
 											endgamefunction();
 									}
 									else if(enemyHp<=0){
-										$('#resultMessage').html('You beat him. Choose another enemy');
-										$('#fightSectionDisplay').empty();
-										enimiesDefeted++;
-										isEnemyChosen=false;
-										choosePlayersfunction();
+										if(enemiesDefeated===2){
+											wongamefunction();
+										}
+										else{
+											console.log(enemiesDefeated);
+											$('#resultMessage').html('You beat him. Choose another enemy');
+											$('#fightSectionDisplay').empty();
+											enemiesDefeated++;
+											isEnemyChosen=false;
+											choosePlayersfunction();
+										}
 									}
 										return;
 								});
@@ -268,7 +277,8 @@ $(document).ready(function(){
 					}//attack function close			
 
 			//}//if still playing close
-		function resetfunction(){			
+		function resetfunction(){	
+						console.log('im in reset function');		
 						$('#restart').on('click', function() {
 							console.log('trying to restart');
 								chosenChar="";
@@ -281,9 +291,10 @@ $(document).ready(function(){
 								playerAp;
 								enemyHp;
 								enemyAp;
-								enimiesDefeted=0;
+								enemiesDefeated=0;
 								stillPlaying=true;
 								$('#yourCharChoiceDisplay').html('<div id="luke" class="char" value="luke"><div>Luke</div><img src=assets/images/luke.png alt="Luke Skywalker"><div class="hp">100</div></div><div id="obi_wan" class="char" value="obi_wan"><div>Obi-Wan</div><img src=assets/images/obi_wan.png alt="Obi-Wan"><div class="hp">120</div></div><div id="count_dooku" class="char" value="count_dooku"><div>Count Dooku</div><img src=assets/images/count_dooku.png alt="Count Dooku"><div class="hp">150</div></div><div id="yoda" class="char" value="yoda"><div>Yoda</div><img src=assets/images/yoda.png alt="Yoda"><div class="hp">180</div></div>');
+								$('#resultMessage').empty();
 								choosePlayersfunction();
 								return;		
 						})
@@ -291,6 +302,7 @@ $(document).ready(function(){
 				return;
 			}//reset function close
 		function endgamefunction(){
+			console.log('im in endgame function');
 			$('#resultMessage').html('Game Over');
 			$('#fightSectionDisplay').empty();
 			$('#yourChosenCharDisplay').empty();
@@ -300,7 +312,21 @@ $(document).ready(function(){
 			$('#restartbtn').html('<button class=btn id="restart">Restart</button>');
 			resetfunction();
 			return;
-		}// endgamefunction close	
+
+		}// endgamefunction close
+		function wongamefunction(){
+			console.log('im in wongame function');
+			console.log(enemiesDefeated)
+			$('#resultMessage').html('CONGRATULATIONS. YOU WON THE GAME!');
+			$('#fightSectionDisplay').empty();
+			$('#yourChosenCharDisplay').empty();
+			$('#yourCharChoiceDisplay').empty();
+			stillPlaying=false;
+			console.log(stillPlaying);
+			$('#restartbtn').html('<button class=btn id="restart">Restart</button>');
+			resetfunction();
+			return;
+		}//wongamefunction close	
 		
 	//} //my function close
 	choosePlayersfunction();
