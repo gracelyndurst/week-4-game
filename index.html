@@ -271,19 +271,20 @@ $(document).ready(function(){
 		function resetfunction(){			
 						$('#restart').on('click', function() {
 							console.log('trying to restart');
-								var chosenChar="";
-								var chosenEnemy="";
-								var isCharChosen=false;
-								var isEnemyChosen=false;
-								var chosenobj;
-								var chosenEnemyobj;
-								var playerHp;
-								var playerAp;
-								var enemyHp;
-								var enemyAp;
-								var enimiesDefeted=0;
-								var stillPlaying=true;
+								chosenChar="";
+								chosenEnemy="";
+								isCharChosen=false;
+								isEnemyChosen=false;
+								chosenobj;
+								chosenEnemyobj;
+								playerHp;
+								playerAp;
+								enemyHp;
+								enemyAp;
+								enimiesDefeted=0;
+								stillPlaying=true;
 								$('#yourCharChoiceDisplay').html('<div id="luke" class="char" value="luke"><div>Luke</div><img src=assets/images/luke.png alt="Luke Skywalker"><div class="hp">100</div></div><div id="obi_wan" class="char" value="obi_wan"><div>Obi-Wan</div><img src=assets/images/obi_wan.png alt="Obi-Wan"><div class="hp">120</div></div><div id="count_dooku" class="char" value="count_dooku"><div>Count Dooku</div><img src=assets/images/count_dooku.png alt="Count Dooku"><div class="hp">150</div></div><div id="yoda" class="char" value="yoda"><div>Yoda</div><img src=assets/images/yoda.png alt="Yoda"><div class="hp">180</div></div>');
+								choosePlayersfunction();
 								return;		
 						})
 				//choosePlayersfunction();
