@@ -1,0 +1,55 @@
+
+ 		body { 
+ 			background: url(../images/starWarsAltBackground.png) no-repeat;
+ 			background-width: 80%;
+ 		}
+ 		.container {
+ 			width: 100%;
+ 			max-width: 1690px;
+ 			margin: 0px auto;
+ 		}
+ 		
+ 		.panel {
+ 			margin-top: 20px;
+ 			background: transparent;
+ 			font-weight: bold;
+ 		}
+
+ 		#yourCharChoiceDislpay {
+ 			box-sizing: border-box;
+ 			height: 60px;
+ 		}
+ 		.char {
+ 			float: left;
+ 			margin: 0px 2px 15px 2px;
+ 			padding:5px;
+ 			background-color: #ffffff;
+ 			text-align: center;
+ 		}
+
+ 		.char img {
+ 			height: 110px;
+ 			padding: 0px 0px 0px 0px;
+ 			background-color: #ffffff;
+ 		}
+ 		.btn {
+ 			float: left;
+ 		}
+
+ 		h3 {
+ 			clear: left;
+ 			color: white;
+ 		}
+ 		#yourChosenCharDisplay {
+ 			box-sizing: border-box;
+ 			height: 200px;
+ 			float: left;
+ 		}
+ 		#enemyChosenDisplay {
+ 			height: 200px;
+ 			float: left;
+ 		}
+ 		#resultMessage {
+ 			color: white;
+ 		}
+
